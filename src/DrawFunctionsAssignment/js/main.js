@@ -1,17 +1,29 @@
-import { stroke, circle, line } from "./graphics-library.js";
+import GraphicsLib from "./graphics-library.js";
 var cnv = document.getElementById("cnv");
 var ctx = cnv.getContext("2d");
-cnv.width = 400;
-cnv.height = 400;
-function drawStickman(x, y, color) {
-    // Draw a Stickman with top-left corner (x, y)
-    // and with the given color
-    stroke(ctx, color);
-    circle(ctx, x + 20, y + 20, 20, true); // Head
-    line(ctx, x + 20, y + 40, x + 20, y + 80); // Body
-    line(ctx, x, y + 70, x + 20, y + 50); // Left Arm
-    line(ctx, x + 40, y + 70, x + 20, y + 50); // Right Arm
-    line(ctx, x, y + 110, x + 20, y + 80); // Left Leg
-    line(ctx, x + 40, y + 110, x + 20, y + 80); // Right Leg
-}
-drawStickman(100, 100, "red");
+cnv.width = 600;
+cnv.height = 600;
+// Initialize graphics library with ctx
+var gl = new GraphicsLib(ctx);
+var drawStar = function (x, y, width, height, lineWidth, color) {
+    if (color === void 0) { color = "black"; }
+    gl.lineWidth(lineWidth);
+    gl.stroke(color);
+    gl.line(x + width / 2, y, x, y + height);
+    gl.line(x + width / 2, y, x + width, y + height);
+    gl.line(x, y + height, x + width, y + height / 2);
+    gl.line(x + width, y + height, x, y + height / 2);
+    gl.line(x, y + height / 2, x + width, y + height / 2);
+};
+var drawPlatform = function (x, y, width, height, surfaceColor, baseColor) {
+    gl.fill(baseColor);
+    gl.rect(x, y, width, height);
+    gl.fill(surfaceColor);
+    gl.rect(x, y, width, height / 3.5);
+};
+drawStar(0, 0, 100, 100, 2, "blue");
+drawStar(120, 0, 120, 120, 3, "red");
+drawStar(260, 0, 150, 120, 1);
+drawPlatform(0, 150, 120, 12, "blue", "red");
+drawPlatform(50, 170, 110, 20, "yellow", "green");
+drawPlatform(190, 190, 150, 15, "orange", "cyan");
