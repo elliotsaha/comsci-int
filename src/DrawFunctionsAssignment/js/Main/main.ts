@@ -1,4 +1,4 @@
-import GraphicsLib from "./graphics-library.js";
+import GraphicsLib from "../GraphicsLib/graphics-library.js";
 
 let cnv = document.getElementById("cnv") as HTMLCanvasElement;
 let ctx = cnv.getContext("2d");
