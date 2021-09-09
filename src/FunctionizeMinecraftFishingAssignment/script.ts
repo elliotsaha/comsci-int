@@ -57,8 +57,7 @@ const simulateCatch = (
 
   for (let i = 0; i < chanceArr.length; i++) {
     sum += chanceArr[i] / 100;
-    // less than or equal because Math.random() can still possibly be 1
-    if (randNum <= sum) {
+    if (randNum < sum) {
       functionList[i]();
       return;
     }
