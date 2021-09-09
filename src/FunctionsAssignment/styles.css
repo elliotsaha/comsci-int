@@ -1,0 +1,51 @@
+.root {
+	font-family: Urbanist, sans-serif;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	padding-bottom: 5rem;
+}
+
+.title {
+	font-size: 2.5rem;
+	width: 30rem;
+	margin-bottom: -0.35rem;
+}
+
+.subtitle {
+	font-weight: bold;
+}
+
+.inputContainer {
+	display: flex;
+	gap: 0.5rem;
+}
+
+#rgbTextInput {
+	border: none;
+	width: 10rem;
+	height: 1rem;
+	padding: 0.5rem;
+	border-radius: 0.2rem;
+	background: #e6e6e6;
+	font-family: Urbanist, sans-serif;
+}
+
+#rgbButtonInput {
+	border: none;
+	padding: 0.5rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	border-radius: 0.2rem;
+	font-family: Urbanist, sans-serif;
+	color: white;
+	background: blue;
+	cursor: pointer;
+}
+
+
