@@ -4,9 +4,25 @@
 	<meta charset="UTF-8">
 	<title>Nickname Generator</title>
 	<link rel="stylesheet" href="./styles.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-
+	<section class="root">
+		<main>
+			<h1 class="title">Nickname Generator</h1>
+			<div class="inputSection">
+				<label>Enter Your First & Last Name:</label>
+				<input id="nameInput" />
+			</div>
+			<div class="btnSection">
+				<button id="randomNickBtn" class="btn">Random Nickname</button>
+				<button id="allNickBtn" class="btn">All Nicknames</button>
+			</div>
+			<div id="responseSection"></div>
+		</main>
+	</section>
 	<script src="js/Main/main.js"></script>
 </body>
 </html>
