@@ -54,9 +54,11 @@ const getLuminance = () => {
   }
 
   // return rounded answer
-  luminanceAnswer.innerHTML = `Luminance (Rounded to four decimal places): ${Luminance.toFixed(
-    4
-  )}`;
+  return Luminance.toFixed(4);
 };
 
-rgbButtonInput.addEventListener("click", getLuminance);
+const renderLuminance = () => {
+  luminanceAnswer.innerHTML = `Luminance (Rounded to four decimal places): ${getLuminance}`;
+};
+
+rgbButtonInput.addEventListener("click", renderLuminance);
