@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Fishing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Minecraft Fishing</h1>
+  <hr>
+
+  <h2>Select a Character:</h2>
+  <p>
+    <img id="steve-img" class="character-img active" src="img/steve.jpg" alt="Steve">
+    <img id="alex-img" class="character-img" src="img/alex.jpg" alt="Alex">
+    <img id="villager-img" class="character-img" src="img/villager.jpg" alt="">
+  </p>
+  <hr>
+
+  <h2>Simulate Fishing</h2>
+  <p>
+    <button id="fish-btn">Fish</button>
+  </p>
+
+  <p>
+    <img id="result-img" src="img/Fishing-Rod.png" alt="Pufferfish">
+  </p>
+
+  <p>
+    <img src="img/Raw-Cod.png" alt="Raw Cod" width="20px"> Raw Cod: <span id="cod-span">0</span> |
+    <img src="img/Raw-Salmon.png" alt="Raw Salmon" width="20px"> Raw Salmon: <span id="salmon-span">0</span>
+  </p>
+  <p>
+    <img src="img/Tropical-Fish.png" alt="Tropical Fish" width="20px"> Tropical Fish: <span id="tropical-span">0</span>
+    |
+    <img src="img/Pufferfish.png" alt="Pufferfish" width="20px"> Pufferfish: <span id="puffer-span">0</span>
+  </p>
+
+  <!-- Load JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>

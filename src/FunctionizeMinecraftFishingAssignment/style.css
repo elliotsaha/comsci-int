@@ -1,0 +1,43 @@
+html {
+  background: url("img/minecraft-river.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+
+body {
+  background: rgba(255, 255, 255, 0.7);
+  width: 600px;
+  padding: 25px 100px;
+  margin: 25px auto;
+  text-align: center;
+  border-radius: 25px;
+}
+
+h1,
+h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.character-img {
+  width: 75px;
+  height: 150px;
+  border: 2px solid grey;
+  margin: 0 5px;
+}
+
+.active {
+  border: 2px solid red;
+}
+
+button {
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+#result-img {
+  width: 200px;
+  height: 200px;
+}
+
+p {
+  font-size: 20px;
+}
