@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Array Visualizer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Student Grades</h1>
+    <hr />
+    <p>
+      Select an action from the drop-down menu and then click the 'Go' button to
+      perform the action.
+    </p>
+    <p>
+      <select id="menu">
+        <option value="first40">First grade to 40</option>
+        <option value="last50">Last grade to 50</option>
+        <option value="random100">Random grade to 100</option>
+        <option value="addRandom">Add random grade</option>
+        <option value="removeLast">Remove the last grade</option>
+        <option value="count50">Count grades below 50</option>
+        <option value="change50">Change low grades to 50</option>
+        <option value="increase10">Increase all grades by 10%</option>
+        <option value="decrease10">Decrease all grades by 10%</option>
+        <option value="remove50">Remove grades below 50</option>
+      </select>
+      <button id="go">Go</button>
+    </p>
+
+    <!-- Container to draw array visualization -->
+    <div id="container"></div>
+
+    <!-- Div that may be used for any output -->
+    <div id="output">-----</div>
+
+    <!-- Load JavaScript -->
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -44,6 +44,9 @@ var getLuminance = function () {
         Luminance += channelManipulatedArr[i];
     }
     // return rounded answer
-    luminanceAnswer.innerHTML = "Luminance (Rounded to four decimal places): " + Luminance.toFixed(4);
+    return Luminance.toFixed(4);
 };
-rgbButtonInput.addEventListener("click", getLuminance);
+var renderLuminance = function () {
+    luminanceAnswer.innerHTML = "Luminance (Rounded to four decimal places): " + getLuminance;
+};
+rgbButtonInput.addEventListener("click", renderLuminance);
