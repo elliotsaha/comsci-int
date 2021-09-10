@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Array Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>Investment Accounts</h1>
+  <hr />
+  <p>
+    Select an action from the drop-down menu and then click the 'Go' button to
+    perform the action.
+  </p>
+  <p>
+    <select id="menu">
+      <option value="count-range">Count Range</option>
+      <option value="donor">Generous Donor</option>
+      <option value="hacker">Hacker Attack</option>
+      <option value="stats">Investment Stats</option>
+      <option value="add">Add Account</option>
+      <option value="remove-low">Remove Low Accounts</option>
+      <option value="robin-hood">Robin Hood</option>
+    </select>
+    <button id="go">Go</button>
+  </p>
+
+  <!-- Container to draw array visualization -->
+  <div id="container"></div>
+
+  <!-- Div that may be used for any output -->
+  <div id="output">-----</div>
+
+  <!-- Load JavaScript -->
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

@@ -1,10 +1,10 @@
 // Student Grades Assignment Start Code
 
 // HTML Variables
-let containerEl = document.getElementById("container");
-let outputEl = document.getElementById("output");
-let goBtnEl = document.getElementById("go");
-let menuEl = document.getElementById("menu") as HTMLInputElement;
+const containerEl = document.getElementById("container");
+const outputEl = document.getElementById("output");
+const goBtnEl = document.getElementById("go");
+const menuEl = document.getElementById("menu") as HTMLInputElement;
 
 // Global Variable
 let grades = [60, 70, 45, 20, 40, 90, 100, 30, 45, 75, 40, 80];
@@ -117,7 +117,7 @@ function increaseGradesBy10() {
   // Increase each grade by 10%.
   for (let i = 0; i < grades.length; i++) {
     grades[i] *= 1.1;
-    if (grades[i] > 100) grades[i] = 100;
+    grades[i] = Math.min(grades[i], 100);
   }
   outputEl.innerHTML = "Increase all grades by 10%";
 }
@@ -137,3 +137,4 @@ function removeGradesBelow50() {
   outputEl.innerHTML = "Remove grades below 50";
 }
 
+export {};

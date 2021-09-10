@@ -1,0 +1,41 @@
+html {
+  background-color: #09457e;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background-color: white;
+  width: 800px;
+  margin: auto;
+  padding: 2vh 100px 8vh;
+  min-height: 90vh;
+}
+
+#go {
+  background-color: #09457e;
+  color: white;
+  padding: 2px 10px;
+  font-size: 18px;
+}
+
+#menu {
+  font-size: 18px;
+  padding: 2px 10px;
+}
+
+#container {
+  border: 1px solid grey;
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+#container div {
+  background-color: orange;
+  border: 1px solid grey;
+  flex: 1;
+}

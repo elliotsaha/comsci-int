@@ -1,4 +1,3 @@
-"use strict";
 // Student Grades Assignment Start Code
 // HTML Variables
 var containerEl = document.getElementById("container");
@@ -111,8 +110,7 @@ function increaseGradesBy10() {
     // Increase each grade by 10%.
     for (var i = 0; i < grades.length; i++) {
         grades[i] *= 1.1;
-        if (grades[i] > 100)
-            grades[i] = 100;
+        grades[i] = Math.min(grades[i], 100);
     }
     outputEl.innerHTML = "Increase all grades by 10%";
 }
@@ -129,3 +127,4 @@ function removeGradesBelow50() {
     grades = newGrades;
     outputEl.innerHTML = "Remove grades below 50";
 }
+export {};
