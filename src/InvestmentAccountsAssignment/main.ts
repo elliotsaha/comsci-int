@@ -5,17 +5,23 @@ let containerEl = document.getElementById("container");
 let outputEl = document.getElementById("output");
 let goBtnEl = document.getElementById("go");
 let menuEl = document.getElementById("menu") as HTMLInputElement;
-
+let addAccountPrompt = document.getElementById("addAccountPrompt");
+let promptOverlay = document.getElementById("promptOverlay");
+let addAccountError = document.getElementById("addAccountError");
+let addAccountBtn = document.getElementById("addAccountBtn");
+let addAccountInput = document.getElementById(
+  "addAccountInput"
+) as HTMLInputElement;
 // Global Variable
 let accounts: Array<number> = [];
 let maxAmount = 5000; // account values should be b/t 0 and max
 
 // Add Accounts
-addAcounts();
+addInitialAccounts();
 // Display Data
 drawArray();
 
-function addAcounts() {
+function addInitialAccounts() {
   // add 200 accounts into accounts array
   for (let i = 0; i < 200; i++) {
     const randAccount = Math.random() * 5000; // random value between 0 - 5000
@@ -73,7 +79,9 @@ function countRange() {
       sum++;
     }
   }
-  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${sum}`;
+  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${sum
+    .toFixed(2)
+    .toLocaleString()}`;
 }
 
 function generousDonor() {
@@ -128,8 +136,47 @@ function addAccount() {
   // array. Output a confirmation that a new account was added with an
   // opening amount of _______.
 
-  // TODO: LAST
-  outputEl.innerHTML = "Add Account";
+  const closePrompt = () => {
+    addAccountPrompt.style.display = "none";
+    promptOverlay.style.display = "none";
+  };
+
+  const openPrompt = () => {
+    addAccountPrompt.style.display = "block";
+    promptOverlay.style.display = "block";
+  };
+
+  const openAccount = (initialMoney: number) => {
+    // cap value at maxAmount
+    accounts.push(Math.min(maxAmount, initialMoney));
+    drawArray();
+
+    const over5000warning =
+      initialMoney > maxAmount
+        ? " (Max value for initial account openings are $5,000)"
+        : "";
+
+    outputEl.innerHTML = `New Account opened with the opening amount of: $${Math.min(
+      maxAmount,
+      initialMoney
+    )
+      .toFixed(2)
+      .toLocaleString()}
+     ${over5000warning}`;
+  };
+
+  // initially open prompt
+  openPrompt();
+
+  addAccountBtn.addEventListener("click", () => {
+    const numInput = parseFloat(addAccountInput.value);
+    if (isNaN(numInput)) {
+      addAccountError.innerHTML = "Invalid Number";
+    } else {
+      openAccount(numInput);
+      closePrompt();
+    }
+  });
 }
 
 function removeLow() {
@@ -156,29 +203,56 @@ function robinHood() {
   // how much each account received.
 
   // amount taken from rich
-  let richSum = 0;
-  // account count for accounts that have under $1000
-  let poorAccSum = 0;
+  let richMoneySum = 0;
+
+  // count for accounts that have under $1000
+  let poorAccountSum = 0;
+
+  const min = Math.min(...accounts);
+  const max = Math.max(...accounts);
+
+  // every account has more than $1,000
+  if (min >= 1000) {
+    outputEl.innerHTML = `There are no accounts that have less than $1000`;
+    return;
+  }
+
+  // every account has less than $4,000
+  if (max <= 4000) {
+    outputEl.innerHTML = `There are no accounts that have more than $4000`;
+    return;
+  }
+
   for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i] < 1000) {
+      poorAccountSum++;
+    }
     if (accounts[i] > 4000) {
       accounts[i] -= 400;
-      richSum += 400;
-    }
-    if (accounts[i] < 1000) {
-      poorAccSum++;
-    }
-  }
-  for (let i = 0; i < accounts.length; i++) {
-    if (accounts[i] < 1000) {
-      accounts[i] += richSum / poorAccSum;
+      richMoneySum += 400;
     }
   }
 
-  outputEl.innerHTML = `${poorAccSum} accounts recieved $${(
-    richSum / poorAccSum
-  )
-    .toFixed(2)
-    .toLocaleString()} each`;
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i] < 1000) {
+      accounts[i] += richMoneySum / poorAccountSum;
+    }
+  }
+
+  // change grammar when there is only one account
+  if (poorAccountSum > 1) {
+    outputEl.innerHTML = `${poorAccountSum} accounts recieved $${(
+      richMoneySum / poorAccountSum
+    )
+      .toFixed(2)
+      .toLocaleString()} each`;
+  } else {
+    outputEl.innerHTML = `${poorAccountSum} account recieved $${(
+      richMoneySum / poorAccountSum
+    )
+      .toFixed(2)
+      .toLocaleString()}`;
+  }
 }
 
 export {};

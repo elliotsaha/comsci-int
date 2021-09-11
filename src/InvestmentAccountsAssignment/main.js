@@ -4,14 +4,19 @@ var containerEl = document.getElementById("container");
 var outputEl = document.getElementById("output");
 var goBtnEl = document.getElementById("go");
 var menuEl = document.getElementById("menu");
+var addAccountPrompt = document.getElementById("addAccountPrompt");
+var promptOverlay = document.getElementById("promptOverlay");
+var addAccountError = document.getElementById("addAccountError");
+var addAccountBtn = document.getElementById("addAccountBtn");
+var addAccountInput = document.getElementById("addAccountInput");
 // Global Variable
 var accounts = [];
 var maxAmount = 5000; // account values should be b/t 0 and max
 // Add Accounts
-addAcounts();
+addInitialAccounts();
 // Display Data
 drawArray();
-function addAcounts() {
+function addInitialAccounts() {
     // add 200 accounts into accounts array
     for (var i = 0; i < 200; i++) {
         var randAccount = Math.random() * 5000; // random value between 0 - 5000
@@ -68,7 +73,9 @@ function countRange() {
             sum++;
         }
     }
-    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + sum;
+    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + sum
+        .toFixed(2)
+        .toLocaleString();
 }
 function generousDonor() {
     // A generous donor has decided to give $500 to every investment
@@ -118,8 +125,37 @@ function addAccount() {
     // Prompt for a new account amount and add this to the invesment account
     // array. Output a confirmation that a new account was added with an
     // opening amount of _______.
-    // TODO: LAST
-    outputEl.innerHTML = "Add Account";
+    var closePrompt = function () {
+        addAccountPrompt.style.display = "none";
+        promptOverlay.style.display = "none";
+    };
+    var openPrompt = function () {
+        addAccountPrompt.style.display = "block";
+        promptOverlay.style.display = "block";
+    };
+    var openAccount = function (initialMoney) {
+        // cap value at maxAmount
+        accounts.push(Math.min(maxAmount, initialMoney));
+        drawArray();
+        var over5000warning = initialMoney > maxAmount
+            ? " (Max value for initial account openings are $5,000)"
+            : "";
+        outputEl.innerHTML = "New Account opened with the opening amount of: $" + Math.min(maxAmount, initialMoney)
+            .toFixed(2)
+            .toLocaleString() + "\n     " + over5000warning;
+    };
+    // initially open prompt
+    openPrompt();
+    addAccountBtn.addEventListener("click", function () {
+        var numInput = parseFloat(addAccountInput.value);
+        if (isNaN(numInput)) {
+            addAccountError.innerHTML = "Invalid Number";
+        }
+        else {
+            openAccount(numInput);
+            closePrompt();
+        }
+    });
 }
 function removeLow() {
     // Remove all accounts that are below $500.
@@ -141,25 +177,45 @@ function robinHood() {
     // Output how many accounts received money and
     // how much each account received.
     // amount taken from rich
-    var richSum = 0;
-    // account count for accounts that have under $1000
-    var poorAccSum = 0;
+    var richMoneySum = 0;
+    // count for accounts that have under $1000
+    var poorAccountSum = 0;
+    var min = Math.min.apply(Math, accounts);
+    var max = Math.max.apply(Math, accounts);
+    // every account has more than $1,000
+    if (min >= 1000) {
+        outputEl.innerHTML = "There are no accounts that have less than $1000";
+        return;
+    }
+    // every account has less than $4,000
+    if (max <= 4000) {
+        outputEl.innerHTML = "There are no accounts that have more than $4000";
+        return;
+    }
     for (var i = 0; i < accounts.length; i++) {
+        if (accounts[i] < 1000) {
+            poorAccountSum++;
+        }
         if (accounts[i] > 4000) {
             accounts[i] -= 400;
-            richSum += 400;
-        }
-        if (accounts[i] < 1000) {
-            poorAccSum++;
+            richMoneySum += 400;
         }
     }
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i] < 1000) {
-            accounts[i] += richSum / poorAccSum;
+            accounts[i] += richMoneySum / poorAccountSum;
         }
     }
-    outputEl.innerHTML = poorAccSum + " accounts recieved $" + (richSum / poorAccSum)
-        .toFixed(2)
-        .toLocaleString() + " each";
+    // change grammar when there is only one account
+    if (poorAccountSum > 1) {
+        outputEl.innerHTML = poorAccountSum + " accounts recieved $" + (richMoneySum / poorAccountSum)
+            .toFixed(2)
+            .toLocaleString() + " each";
+    }
+    else {
+        outputEl.innerHTML = poorAccountSum + " account recieved $" + (richMoneySum / poorAccountSum)
+            .toFixed(2)
+            .toLocaleString();
+    }
 }
 export {};
