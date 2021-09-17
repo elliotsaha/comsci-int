@@ -46,19 +46,18 @@ const applyChannelFormula = (rgb8BitArray: Array<number>): Array<number> => {
 const getLuminance = () => {
   const numArr = rgbStringParser(rgbTextInput, true);
   const channelManipulatedArr = applyChannelFormula(numArr as Array<number>);
-
   // add up channels to single luminance value
   let Luminance = 0;
   for (let i = 0; i < channelManipulatedArr.length; i++) {
     Luminance += channelManipulatedArr[i];
   }
-
   // return rounded answer
   return Luminance.toFixed(4);
 };
 
 const renderLuminance = () => {
-  luminanceAnswer.innerHTML = `Luminance (Rounded to four decimal places): ${getLuminance}`;
+  const result = getLuminance();
+  luminanceAnswer.innerHTML = `Luminance (Rounded to four decimal places): ${result}`;
 };
 
 rgbButtonInput.addEventListener("click", renderLuminance);

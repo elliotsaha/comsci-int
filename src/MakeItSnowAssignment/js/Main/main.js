@@ -45,13 +45,12 @@ var addSnowflakeOnInput = function () {
 };
 var updateSnowflakes = function () {
     for (var i = 0; i < snowflakes.length; i++) {
-        switch (snowflakes[i].xDir) {
-            case "r":
-                snowflakes[i].x += snowflakes[i].xSpeed; // snowflake goes in right direction
-                break;
-            case "l":
-                snowflakes[i].x -= snowflakes[i].xSpeed; // snowflake goes in left direction
-                break;
+        // change xSpeed based on direction
+        if (snowflakes[i].xDir === "r") {
+            snowflakes[i].x += snowflakes[i].xSpeed; // snowflake goes in right direction
+        }
+        else {
+            snowflakes[i].x -= snowflakes[i].xSpeed; // snowflake goes in left direction
         }
         // if snowflake hits right wall change direction to left
         if (snowflakes[i].x >= cnv.width) {
@@ -80,6 +79,10 @@ var programLoop = function () {
     // calls itself recursively after each frame
     window.requestAnimationFrame(programLoop);
 };
+/*
+ * outside of program loop to ensure it does not
+ * run multiple times on a single call
+ * */
 addSnowflakeOnInput();
 // start loop when window is rendered
 window.onload = function () { return window.requestAnimationFrame(programLoop); };

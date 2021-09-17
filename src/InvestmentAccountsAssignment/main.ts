@@ -79,9 +79,7 @@ function countRange() {
       sum++;
     }
   }
-  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${sum
-    .toFixed(2)
-    .toLocaleString()}`;
+  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${sum}`;
 }
 
 function generousDonor() {
@@ -184,13 +182,15 @@ function removeLow() {
   // Output how many accounts were removed.
 
   let removeSum = 0;
+  let newArr = [];
   for (let i = 0; i < accounts.length; i++) {
     if (accounts[i] < 500) {
       removeSum++;
-      accounts.splice(i, 1);
+    } else {
+      newArr.push(accounts[i]);
     }
   }
-
+  accounts = newArr;
   outputEl.innerHTML = `${removeSum} accounts removed`;
 }
 

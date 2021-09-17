@@ -73,9 +73,7 @@ function countRange() {
             sum++;
         }
     }
-    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + sum
-        .toFixed(2)
-        .toLocaleString();
+    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + sum;
 }
 function generousDonor() {
     // A generous donor has decided to give $500 to every investment
@@ -161,12 +159,16 @@ function removeLow() {
     // Remove all accounts that are below $500.
     // Output how many accounts were removed.
     var removeSum = 0;
+    var newArr = [];
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i] < 500) {
             removeSum++;
-            accounts.splice(i, 1);
+        }
+        else {
+            newArr.push(accounts[i]);
         }
     }
+    accounts = newArr;
     outputEl.innerHTML = removeSum + " accounts removed";
 }
 function robinHood() {
