@@ -67,57 +67,50 @@ function mainMenu() {
 // ******************************************************
 function countRange() {
     // Output the number of accounts with amounts between $2,000 and $4,000, inclusive
-    var sum = 0;
+    var count = 0;
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i] >= 2000 && accounts[i] <= 4000) {
-            sum++;
+            count++;
         }
     }
-    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + sum;
+    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + count;
 }
 function generousDonor() {
     // A generous donor has decided to give $500 to every investment
     // account that has less than $2000.
     // Modify the investment account array to apply this donation.
     // Output the total amount of money that was donated.
-    var sum = 0;
+    var totalAmount = 0;
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i] < 2000) {
             accounts[i] += 500;
-            sum += 500;
+            totalAmount += 500;
         }
     }
-    outputEl.innerHTML = "the total amount donated is $" + sum
-        .toFixed(2)
-        .toLocaleString();
+    outputEl.innerHTML = "the total amount donated is $" + totalAmount.toFixed(2);
 }
 function hackerAttack() {
     // A hacker steals 5% from every account.
     // Modify the investment account array to apply this theft.
     // Output the total amount that was stolen.
-    var sum = 0;
+    var totalAmount = 0;
     for (var i = 0; i < accounts.length; i++) {
+        totalAmount += accounts[i] * 0.05;
         accounts[i] *= 0.95;
-        sum += accounts[i] * 0.05;
     }
-    outputEl.innerHTML = "the total amount stolen by the hacker is $" + sum
-        .toFixed(2)
-        .toLocaleString();
+    outputEl.innerHTML = "the total amount stolen by the hacker is $" + totalAmount.toFixed(2);
 }
 function investmentStats() {
     // Output the minimum account amount, the maximum account amount
     // and the average account amount.
     var max = Math.max.apply(Math, accounts);
     var min = Math.min.apply(Math, accounts);
-    var sum = accounts.reduce(function (arr, i) { return arr + i; }, 0);
+    var sum = 0;
+    for (var i = 0; i < accounts.length; i++) {
+        sum += accounts[i];
+    }
     var avg = sum / accounts.length;
-    outputEl.innerHTML = "min account amount: $" + min
-        .toFixed(2)
-        .toLocaleString() + ", max account amount: $" + max
-        .toFixed(2)
-        .toLocaleString() + ", avg account amount: $" + avg
-        .toFixed(2)
-        .toLocaleString();
+    outputEl.innerHTML = "min account amount: $" + min.toFixed(2) + ", max account amount: $" + max.toFixed(2) + ", avg account amount: $" + avg.toFixed(2);
 }
 function addAccount() {
     // Prompt for a new account amount and add this to the invesment account
@@ -136,11 +129,9 @@ function addAccount() {
         accounts.push(Math.min(maxAmount, initialMoney));
         drawArray();
         var over5000warning = initialMoney > maxAmount
-            ? " (Max value for initial account openings are $5,000)"
+            ? "(Max value for initial account openings are $5,000)"
             : "";
-        outputEl.innerHTML = "New Account opened with the opening amount of: $" + Math.min(maxAmount, initialMoney)
-            .toFixed(2)
-            .toLocaleString() + "\n     " + over5000warning;
+        outputEl.innerHTML = "New Account opened with the opening amount of: $" + Math.min(maxAmount, initialMoney) + "\n     " + over5000warning;
     };
     // initially open prompt
     openPrompt();
@@ -159,16 +150,12 @@ function removeLow() {
     // Remove all accounts that are below $500.
     // Output how many accounts were removed.
     var removeSum = 0;
-    var newArr = [];
-    for (var i = 0; i < accounts.length; i++) {
+    for (var i = accounts.length - 1; i >= 0; i--) {
         if (accounts[i] < 500) {
             removeSum++;
-        }
-        else {
-            newArr.push(accounts[i]);
+            accounts.splice(i, 1);
         }
     }
-    accounts = newArr;
     outputEl.innerHTML = removeSum + " accounts removed";
 }
 function robinHood() {
@@ -184,12 +171,12 @@ function robinHood() {
     var poorAccountSum = 0;
     var min = Math.min.apply(Math, accounts);
     var max = Math.max.apply(Math, accounts);
-    // every account has more than $1,000
+    // every account has more than or equal to $1,000
     if (min >= 1000) {
         outputEl.innerHTML = "There are no accounts that have less than $1000";
         return;
     }
-    // every account has less than $4,000
+    // every account has less than or equal to $4,000
     if (max <= 4000) {
         outputEl.innerHTML = "There are no accounts that have more than $4000";
         return;
@@ -203,21 +190,12 @@ function robinHood() {
             richMoneySum += 400;
         }
     }
+    var distrib = richMoneySum / poorAccountSum;
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i] < 1000) {
-            accounts[i] += richMoneySum / poorAccountSum;
+            accounts[i] += distrib;
         }
     }
-    // change grammar when there is only one account
-    if (poorAccountSum > 1) {
-        outputEl.innerHTML = poorAccountSum + " accounts recieved $" + (richMoneySum / poorAccountSum)
-            .toFixed(2)
-            .toLocaleString() + " each";
-    }
-    else {
-        outputEl.innerHTML = poorAccountSum + " account recieved $" + (richMoneySum / poorAccountSum)
-            .toFixed(2)
-            .toLocaleString();
-    }
+    outputEl.innerHTML = poorAccountSum + " account(s) recieved $" + (richMoneySum / poorAccountSum).toFixed(2);
 }
 export {};

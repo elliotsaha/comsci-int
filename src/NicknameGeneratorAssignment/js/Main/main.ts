@@ -16,7 +16,7 @@ const allNicknames = [
 ];
 
 const getRandomNick = () => {
-  // convert input string into array
+  // split name string into [firstName, lastName]
   const inputValArr = nameInput.value.split(" ");
 
   // get random index position in allNicknames array
@@ -32,17 +32,18 @@ const getRandomNick = () => {
 };
 
 const getAllNicks = () => {
-  // convert input string into array
+  // split name string into [firstName, lastName]
   const inputValArr = nameInput.value.split(" ");
 
-  let responseStr = ``;
+  // innerHTML of responseSection
+  let htmlStr = ``;
 
   // iterate through all nicknames and add to responseStr
   for (let i = 0; i < allNicknames.length; i++) {
-    responseStr += `<div>${inputValArr[0]} ${allNicknames[i]} ${inputValArr[1]}</div>`;
+    htmlStr += `<div>${inputValArr[0]} ${allNicknames[i]} ${inputValArr[1]}</div>`;
   }
 
-  responseSection.innerHTML = responseStr;
+  responseSection.innerHTML = htmlStr;
 };
 
 randomNickBtn.addEventListener("click", getRandomNick);

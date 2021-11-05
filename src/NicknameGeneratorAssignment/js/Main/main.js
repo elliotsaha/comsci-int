@@ -15,7 +15,7 @@ var allNicknames = [
     "\"Retro\"",
 ];
 var getRandomNick = function () {
-    // convert input string into array
+    // split name string into [firstName, lastName]
     var inputValArr = nameInput.value.split(" ");
     // get random index position in allNicknames array
     var randIdx = Math.round(Math.random() * (allNicknames.length - 1));
@@ -27,14 +27,15 @@ var getRandomNick = function () {
     responseSection.innerHTML = "" + inputValArr.join(" ");
 };
 var getAllNicks = function () {
-    // convert input string into array
+    // split name string into [firstName, lastName]
     var inputValArr = nameInput.value.split(" ");
-    var responseStr = "";
+    // innerHTML of responseSection
+    var htmlStr = "";
     // iterate through all nicknames and add to responseStr
     for (var i = 0; i < allNicknames.length; i++) {
-        responseStr += "<div>" + inputValArr[0] + " " + allNicknames[i] + " " + inputValArr[1] + "</div>";
+        htmlStr += "<div>" + inputValArr[0] + " " + allNicknames[i] + " " + inputValArr[1] + "</div>";
     }
-    responseSection.innerHTML = responseStr;
+    responseSection.innerHTML = htmlStr;
 };
 randomNickBtn.addEventListener("click", getRandomNick);
 allNickBtn.addEventListener("click", getAllNicks);

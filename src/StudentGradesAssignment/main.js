@@ -72,7 +72,7 @@ function lastTo50() {
 }
 function randomTo100() {
     // Set the grade of a random student to 100.
-    var randIdx = Math.round(Math.random() * (grades.length - 1));
+    var randIdx = Math.floor(Math.random() * grades.length);
     grades[randIdx] = 100;
     outputEl.innerHTML = "Random grade to 100";
 }
@@ -123,8 +123,13 @@ function decreaseGradesBy10() {
 }
 function removeGradesBelow50() {
     // Remove all grades that are below 50.
-    var newGrades = grades.filter(function (grade) { return grade > 50; });
-    grades = newGrades;
+    var newArr = [];
+    for (var i = 0; i < grades.length; i++) {
+        if (grades[i] > 50) {
+            newArr.push(grades[i]);
+        }
+    }
+    grades = newArr;
     outputEl.innerHTML = "Remove grades below 50";
 }
 export {};

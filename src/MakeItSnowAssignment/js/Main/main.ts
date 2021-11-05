@@ -27,7 +27,7 @@ const genRandomSnowflake = (): SnowflakeProps => ({
   xSpeed: Math.random() * 1.5,
   ySpeed: Math.random() * 1.5,
   // determines whether snowflake has a positive or a negative x direction
-  xDir: Math.round(Math.random()) === 1 ? ("r" as "r") : ("l" as "l"),
+  xDir: Math.round(Math.random()) === 1 ? "r" : "l",
 });
 
 const pushRandomSnowflake = (): void => {

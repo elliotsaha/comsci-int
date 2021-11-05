@@ -12,6 +12,7 @@ let addAccountBtn = document.getElementById("addAccountBtn");
 let addAccountInput = document.getElementById(
   "addAccountInput"
 ) as HTMLInputElement;
+
 // Global Variable
 let accounts: Array<number> = [];
 let maxAmount = 5000; // account values should be b/t 0 and max
@@ -42,7 +43,6 @@ function drawArray() {
 
 // Main Menu & Go Button
 goBtnEl.addEventListener("click", mainMenu);
-
 function mainMenu() {
   // Get value of menu select element
   let selection = menuEl.value;
@@ -73,13 +73,13 @@ function mainMenu() {
 // ******************************************************
 function countRange() {
   // Output the number of accounts with amounts between $2,000 and $4,000, inclusive
-  let sum = 0;
+  let count = 0;
   for (let i = 0; i < accounts.length; i++) {
     if (accounts[i] >= 2000 && accounts[i] <= 4000) {
-      sum++;
+      count++;
     }
   }
-  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${sum}`;
+  outputEl.innerHTML = `The number of accounts between $2,000 & $4,000 is ${count}`;
 }
 
 function generousDonor() {
@@ -87,30 +87,28 @@ function generousDonor() {
   // account that has less than $2000.
   // Modify the investment account array to apply this donation.
   // Output the total amount of money that was donated.
-  let sum = 0;
+  let totalAmount = 0;
   for (let i = 0; i < accounts.length; i++) {
     if (accounts[i] < 2000) {
       accounts[i] += 500;
-      sum += 500;
+      totalAmount += 500;
     }
   }
-  outputEl.innerHTML = `the total amount donated is $${sum
-    .toFixed(2)
-    .toLocaleString()}`;
+  outputEl.innerHTML = `the total amount donated is $${totalAmount.toFixed(2)}`;
 }
 
 function hackerAttack() {
   // A hacker steals 5% from every account.
   // Modify the investment account array to apply this theft.
   // Output the total amount that was stolen.
-  let sum = 0;
+  let totalAmount = 0;
   for (let i = 0; i < accounts.length; i++) {
+    totalAmount += accounts[i] * 0.05;
     accounts[i] *= 0.95;
-    sum += accounts[i] * 0.05;
   }
-  outputEl.innerHTML = `the total amount stolen by the hacker is $${sum
-    .toFixed(2)
-    .toLocaleString()}`;
+  outputEl.innerHTML = `the total amount stolen by the hacker is $${totalAmount.toFixed(
+    2
+  )}`;
 }
 
 function investmentStats() {
@@ -118,15 +116,16 @@ function investmentStats() {
   // and the average account amount.
   const max = Math.max(...accounts);
   const min = Math.min(...accounts);
-  const sum = accounts.reduce((arr, i) => arr + i, 0);
+  let sum = 0;
+  for (let i = 0; i < accounts.length; i++) {
+    sum += accounts[i];
+  }
   const avg = sum / accounts.length;
-  outputEl.innerHTML = `min account amount: $${min
-    .toFixed(2)
-    .toLocaleString()}, max account amount: $${max
-    .toFixed(2)
-    .toLocaleString()}, avg account amount: $${avg
-    .toFixed(2)
-    .toLocaleString()}`;
+  outputEl.innerHTML = `min account amount: $${min.toFixed(
+    2
+  )}, max account amount: $${max.toFixed(
+    2
+  )}, avg account amount: $${avg.toFixed(2)}`;
 }
 
 function addAccount() {
@@ -151,15 +150,13 @@ function addAccount() {
 
     const over5000warning =
       initialMoney > maxAmount
-        ? " (Max value for initial account openings are $5,000)"
+        ? "(Max value for initial account openings are $5,000)"
         : "";
 
     outputEl.innerHTML = `New Account opened with the opening amount of: $${Math.min(
       maxAmount,
       initialMoney
-    )
-      .toFixed(2)
-      .toLocaleString()}
+    )}
      ${over5000warning}`;
   };
 
@@ -182,15 +179,12 @@ function removeLow() {
   // Output how many accounts were removed.
 
   let removeSum = 0;
-  let newArr = [];
-  for (let i = 0; i < accounts.length; i++) {
+  for (let i = accounts.length - 1; i >= 0; i--) {
     if (accounts[i] < 500) {
       removeSum++;
-    } else {
-      newArr.push(accounts[i]);
+      accounts.splice(i, 1);
     }
   }
-  accounts = newArr;
   outputEl.innerHTML = `${removeSum} accounts removed`;
 }
 
@@ -211,13 +205,13 @@ function robinHood() {
   const min = Math.min(...accounts);
   const max = Math.max(...accounts);
 
-  // every account has more than $1,000
+  // every account has more than or equal to $1,000
   if (min >= 1000) {
     outputEl.innerHTML = `There are no accounts that have less than $1000`;
     return;
   }
 
-  // every account has less than $4,000
+  // every account has less than or equal to $4,000
   if (max <= 4000) {
     outputEl.innerHTML = `There are no accounts that have more than $4000`;
     return;
@@ -233,26 +227,16 @@ function robinHood() {
     }
   }
 
+  const distrib = richMoneySum / poorAccountSum;
   for (let i = 0; i < accounts.length; i++) {
     if (accounts[i] < 1000) {
-      accounts[i] += richMoneySum / poorAccountSum;
+      accounts[i] += distrib;
     }
   }
 
-  // change grammar when there is only one account
-  if (poorAccountSum > 1) {
-    outputEl.innerHTML = `${poorAccountSum} accounts recieved $${(
-      richMoneySum / poorAccountSum
-    )
-      .toFixed(2)
-      .toLocaleString()} each`;
-  } else {
-    outputEl.innerHTML = `${poorAccountSum} account recieved $${(
-      richMoneySum / poorAccountSum
-    )
-      .toFixed(2)
-      .toLocaleString()}`;
-  }
+  outputEl.innerHTML = `${poorAccountSum} account(s) recieved $${(
+    richMoneySum / poorAccountSum
+  ).toFixed(2)}`;
 }
 
 export {};

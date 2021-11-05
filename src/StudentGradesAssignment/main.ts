@@ -74,7 +74,7 @@ function lastTo50() {
 
 function randomTo100() {
   // Set the grade of a random student to 100.
-  const randIdx = Math.round(Math.random() * (grades.length - 1));
+  const randIdx = Math.floor(Math.random() * grades.length);
   grades[randIdx] = 100;
   outputEl.innerHTML = "Random grade to 100";
 }
@@ -132,8 +132,13 @@ function decreaseGradesBy10() {
 
 function removeGradesBelow50() {
   // Remove all grades that are below 50.
-  const newGrades = grades.filter((grade) => grade > 50);
-  grades = newGrades;
+  let newArr = [];
+  for (let i = 0; i < grades.length; i++) {
+    if (grades[i] > 50) {
+      newArr.push(grades[i]);
+    }
+  }
+  grades = newArr;
   outputEl.innerHTML = "Remove grades below 50";
 }
 
