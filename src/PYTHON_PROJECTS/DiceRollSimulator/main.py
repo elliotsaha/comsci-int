@@ -12,24 +12,20 @@ Dice Roll Simulator Menu
     '''
     )
     userResponse = int(input("Select an option from the menu (1-5): "))
-    # if cases 1 - 4, recursively runs itself
     match userResponse:
         case 1:
             rollDiceOnce()
-            showMenu()
         case 2:
             rollDice5Times()
-            showMenu()
         case 3:
             rollDiceNTimes()
-            showMenu()
         case 4:
             rollDiceUntilSnakeEyes()
-            showMenu()
         case 5:
             exitProgram()
         case _:
             print("Invalid number, please select a number between 1 - 5")
+    showMenu()
 
 # helper function for all other functions
 def rollDice(getData = False):
