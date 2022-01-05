@@ -11,17 +11,17 @@ Dice Roll Simulator Menu
     5. Exit
     '''
     )
-    userResponse = int(input("Select an option from the menu (1-5): "))
+    userResponse = input("Select an option from the menu (1-5): ")
     match userResponse:
-        case 1:
+        case "1":
             rollDiceOnce()
-        case 2:
+        case "2":
             rollDice5Times()
-        case 3:
+        case "3":
             rollDiceNTimes()
-        case 4:
+        case "4":
             rollDiceUntilSnakeEyes()
-        case 5:
+        case "5":
             exitProgram()
         case _:
             print("Invalid number, please select a number between 1 - 5")
