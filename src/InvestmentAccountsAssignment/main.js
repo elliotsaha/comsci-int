@@ -28,7 +28,7 @@ function drawArray() {
     var divHeight;
     for (var i = 0; i < accounts.length; i++) {
         divHeight = (accounts[i] / maxAmount) * 600; // Scale accounts to fit in array visualizer container
-        outputStr += "<div style=\"height:" + divHeight + "px\"></div>";
+        outputStr += "<div style=\"height:".concat(divHeight, "px\"></div>");
     }
     containerEl.innerHTML = outputStr;
 }
@@ -73,7 +73,7 @@ function countRange() {
             count++;
         }
     }
-    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is " + count;
+    outputEl.innerHTML = "The number of accounts between $2,000 & $4,000 is ".concat(count);
 }
 function generousDonor() {
     // A generous donor has decided to give $500 to every investment
@@ -87,7 +87,7 @@ function generousDonor() {
             totalAmount += 500;
         }
     }
-    outputEl.innerHTML = "the total amount donated is $" + totalAmount.toFixed(2);
+    outputEl.innerHTML = "the total amount donated is $".concat(totalAmount.toFixed(2));
 }
 function hackerAttack() {
     // A hacker steals 5% from every account.
@@ -98,7 +98,7 @@ function hackerAttack() {
         totalAmount += accounts[i] * 0.05;
         accounts[i] *= 0.95;
     }
-    outputEl.innerHTML = "the total amount stolen by the hacker is $" + totalAmount.toFixed(2);
+    outputEl.innerHTML = "the total amount stolen by the hacker is $".concat(totalAmount.toFixed(2));
 }
 function investmentStats() {
     // Output the minimum account amount, the maximum account amount
@@ -110,7 +110,7 @@ function investmentStats() {
         sum += accounts[i];
     }
     var avg = sum / accounts.length;
-    outputEl.innerHTML = "min account amount: $" + min.toFixed(2) + ", max account amount: $" + max.toFixed(2) + ", avg account amount: $" + avg.toFixed(2);
+    outputEl.innerHTML = "min account amount: $".concat(min.toFixed(2), ", max account amount: $").concat(max.toFixed(2), ", avg account amount: $").concat(avg.toFixed(2));
 }
 function addAccount() {
     // Prompt for a new account amount and add this to the invesment account
@@ -131,7 +131,7 @@ function addAccount() {
         var over5000warning = initialMoney > maxAmount
             ? "(Max value for initial account openings are $5,000)"
             : "";
-        outputEl.innerHTML = "New Account opened with the opening amount of: $" + Math.min(maxAmount, initialMoney) + "\n     " + over5000warning;
+        outputEl.innerHTML = "New Account opened with the opening amount of: $".concat(Math.min(maxAmount, initialMoney), "\n     ").concat(over5000warning);
     };
     // initially open prompt
     openPrompt();
@@ -156,7 +156,7 @@ function removeLow() {
             accounts.splice(i, 1);
         }
     }
-    outputEl.innerHTML = removeSum + " accounts removed";
+    outputEl.innerHTML = "".concat(removeSum, " accounts removed");
 }
 function robinHood() {
     // Steal from the rich and give to the poor.
@@ -196,6 +196,6 @@ function robinHood() {
             accounts[i] += distrib;
         }
     }
-    outputEl.innerHTML = poorAccountSum + " account(s) recieved $" + (richMoneySum / poorAccountSum).toFixed(2);
+    outputEl.innerHTML = "".concat(poorAccountSum, " account(s) recieved $").concat((richMoneySum / poorAccountSum).toFixed(2));
 }
 export {};

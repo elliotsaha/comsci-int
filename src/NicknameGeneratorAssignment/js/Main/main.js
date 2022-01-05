@@ -24,7 +24,7 @@ var getRandomNick = function () {
      * */
     inputValArr.splice(1, 0, allNicknames[randIdx]);
     // join array back into string with spaces in between each word
-    responseSection.innerHTML = "" + inputValArr.join(" ");
+    responseSection.innerHTML = "".concat(inputValArr.join(" "));
 };
 var getAllNicks = function () {
     // split name string into [firstName, lastName]
@@ -33,7 +33,7 @@ var getAllNicks = function () {
     var htmlStr = "";
     // iterate through all nicknames and add to responseStr
     for (var i = 0; i < allNicknames.length; i++) {
-        htmlStr += "<div>" + inputValArr[0] + " " + allNicknames[i] + " " + inputValArr[1] + "</div>";
+        htmlStr += "<div>".concat(inputValArr[0], " ").concat(allNicknames[i], " ").concat(inputValArr[1], "</div>");
     }
     responseSection.innerHTML = htmlStr;
 };

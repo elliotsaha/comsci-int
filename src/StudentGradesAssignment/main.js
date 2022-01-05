@@ -14,7 +14,7 @@ function drawArray() {
     var divHeight;
     for (var i = 0; i < grades.length; i++) {
         divHeight = (grades[i] / maxGrade) * 600; // Scale grades to fit in array visualizer container
-        outputStr += "<div style=\"height:" + divHeight + "px\"></div>";
+        outputStr += "<div style=\"height:".concat(divHeight, "px\"></div>");
     }
     containerEl.innerHTML = outputStr;
 }
@@ -95,7 +95,7 @@ function countBelow50() {
             count++;
         }
     }
-    outputEl.innerHTML = "There are " + count + " grades below 50";
+    outputEl.innerHTML = "There are ".concat(count, " grades below 50");
 }
 function lowGradesTo50() {
     // Change all grades that are below 50 to be equal to 50.
