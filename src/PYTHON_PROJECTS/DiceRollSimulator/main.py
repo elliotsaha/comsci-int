@@ -40,18 +40,19 @@ def rollDiceOnce():
     rollDice()
 
 def rollDice5Times():
-    for i in range(5):
+    for _ in range(5):
         rollDice()
 
 def rollDiceNTimes():
     numberOfRolls = int(input("How many rolls would you like? "))
-    for i in range(numberOfRolls):
+    for _ in range(numberOfRolls):
         rollDice()
 
 # rollCounter is the number of times the dice has been rolled until snake eyes occurs
 def rollDiceUntilSnakeEyes(rollCounter = 1):
     rollDiceData = rollDice(True)
     # if the first roll and the secound roll both return 1
+    # pyright: reportOptionalSubscript=false
     if rollDiceData[0] == 1 and rollDiceData[1] == 1:
         print("SNAKE EYES! It took {0} rolls to get snake eyes".format(rollCounter))
         return;
