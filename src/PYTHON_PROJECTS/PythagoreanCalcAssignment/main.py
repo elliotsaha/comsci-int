@@ -11,7 +11,7 @@ secoundSide = float(secoundSide)
 cSquared = firstSide ** 2 + secoundSide ** 2
 
 # sqrt cSquared, and turn into string
-hypotenuse =  str(round(math.sqrt(cSquared)))
+hypotenuse =  str(round(math.sqrt(cSquared), 2))
 
 # output
 print("The hypotenuse is", hypotenuse, "cm")
