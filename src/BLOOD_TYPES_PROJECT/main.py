@@ -7,11 +7,15 @@ class BloodType:
         self.antigens = self.destructureBloodType(bloodType)
 
     def destructureBloodType(self, bloodType):
+        # turn every character in bloodType into a list iterable
         bloodTypeList = list(bloodType)
+        # O is not a valid antigen, so it is removed from beginning
         if 'O' in bloodTypeList:
             bloodTypeList.pop(0)
+        # + automatically turns into D antigen / Rh factor
         if '+' in bloodTypeList:
             bloodTypeList[-1] = 'D'
+        # - means that D antigen / Rh factor is simply not present, so it is removed from list
         if '-' in bloodTypeList:
             bloodTypeList.pop()
         return bloodTypeList
@@ -75,8 +79,8 @@ class BloodType:
 
 
 
-APositive = BloodType("awag")
-print(APositive.canRecieveBloodFrom())
+APositive = BloodType("O-")
+print(APositive.composeBloodType([]))
 
 
 
