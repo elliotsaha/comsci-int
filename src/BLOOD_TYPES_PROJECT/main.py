@@ -20,67 +20,60 @@ class BloodType:
             bloodTypeList.pop()
         return bloodTypeList
 
-    def composeBloodType(self, destructureBloodType):
-        if 'D' in destructureBloodType:
-            destructureBloodType[-1] = '+'
+    def composeBloodType(self, destructuredBloodType):
+        # do opposite of destructureBloodType
+        if 'D' in destructuredBloodType:
+            destructuredBloodType[-1] = '+'
         else:
-            destructureBloodType.append('-')
-        return ''.join(destructureBloodType)
+            destructuredBloodType.append('-')
+
+        # if destructuredBloodType only contains '+' or '-', append 'O' antigen at the beginning of the array
+        if set(destructuredBloodType) == set(['-']) or set(destructuredBloodType) == set(['+']):
+            return ''.join(['O'] + destructuredBloodType)
+
+        return ''.join(destructuredBloodType)
 
     def getAllDestructuredBloodTypes(self):
         destructureBloodTypeList = []
-        for x in self.allBloodTypes:
-            destructureBloodTypeList.append(self.destructureBloodType(x))
+        for bloodType in self.allBloodTypes:
+            destructureBloodTypeList.append(self.destructureBloodType(bloodType))
         return destructureBloodTypeList
 
     def getBloodType(self):
         return self.bloodType
 
     def getAntigens(self):
-        return 'Antigens include: {0}'.format(','.join(self.antigens))
+        return 'Antigens include: {0}'.format(', '.join(self.antigens))
 
     def getAntibodies(self):
         antibodies = ['A', 'B', 'D']
         for antigen in self.antigens:
             if antigen in antibodies:
                 antibodies.remove(antigen)
-        return 'Antibodies include: {0}'.format(','.join(antibodies))
+        return 'Antibodies include: {0}'.format(', '.join(antibodies))
 
     def canGiveBloodTo(self):
+        destructuredBloodTypes = self.getAllDestructuredBloodTypes()
         canGiveBloodToList = []
-        destructureBloodTypeList = self.getAllDestructuredBloodTypes()[:-2]
-        for i in destructureBloodTypeList:
+        for i in destructuredBloodTypes:
             if set(self.antigens).issubset(set(i)):
                 canGiveBloodToList.append(self.composeBloodType(i))
-
-        if self.bloodType not in canGiveBloodToList:
-            canGiveBloodToList.append(self.bloodType)
-
-        if self.bloodType == "O-":
-            canGiveBloodToList.append("O+")
-
-        return '{0} people can give to people who have these blood types: {1}'.format(self.bloodType, ','.join(canGiveBloodToList))
+        return '{0} people can give blood to people who have these blood types: {1}'.format(self.bloodType, ', '.join(canGiveBloodToList))
 
     def canRecieveBloodFrom(self):
-        canRecieveBloodToList = ["O-"]
-        if "D" in self.destructureBloodType(self.bloodType):
-            canRecieveBloodToList.append("O+")
-
-        destructureBloodTypeList = self.getAllDestructuredBloodTypes()[:-2]
+        destructureBloodTypeList = self.getAllDestructuredBloodTypes()
+        canRecieveBloodFrom = []
         for i in destructureBloodTypeList:
             if set(i).issubset(set(self.antigens)):
-                canRecieveBloodToList.append(self.composeBloodType(i))
+                canRecieveBloodFrom.append(self.composeBloodType(i))
 
-        if self.bloodType not in canRecieveBloodToList:
-            canRecieveBloodToList.append(self.bloodType)
-
-        return '{0} people can recieve blood from people who have these blood types: {1}'.format(self.bloodType, ','.join(canRecieveBloodToList))
+        return '{0} people can recieve blood from people who have these blood types: {1}'.format(self.bloodType, ', '.join(canRecieveBloodFrom))
 
 
 
 
-APositive = BloodType("O-")
-print(APositive.composeBloodType([]))
+APositive = BloodType("A-")
+print(APositive.canRecieveBloodFrom())
 
 
 
