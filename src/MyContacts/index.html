@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Contacts Basic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Main Heading -->
+  <h1>My Contacts</h1>
+
+  <!-- Option Tabs -->
+  <div class="tabs">
+    <div id="search-tab" class="tab">Search</div>
+    <div id="all-tab" class="tab">All Contacts</div>
+    <div id="new-tab" class="tab">New Contact</div>
+    <div id="delete-tab" class="tab">Delete Contact</div>
+  </div>
+
+  <!-- Search Bar Option -->
+  <div id="search-option">
+    <h3>Search by Name</h3>
+    <p>Name: <input type="text" id="search-input"> <button id="search-btn">Search</button></p>
+  </div>
+
+  <!-- New Contact Option -->
+  <div id="new-option">
+    <h3>New Contact</h3>
+    <p>Name: <input type="text" id="name-input"></p>
+    <p>Phone: <input type="text" id="phone-input"></p>
+    <p>Email: <input type="email" id="email-input"></p>
+    <p><button id="new-btn">Create</button></p>
+  </div>
+
+  <!-- Delete Contact Option -->
+  <div id="delete-option">
+    <h3>Delete by Name</h3>
+    <p>Name: <input type="text" id="delete-input"> <button id="delete-btn">Delete</button></p>
+  </div>
+
+  <hr>
+
+  <!-- Div to display content -->
+  <div id="content">
+
+  </div>
+
+  <!-- Load JavaScript -->
+  <script src="gui.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

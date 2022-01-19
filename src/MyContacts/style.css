@@ -1,0 +1,34 @@
+html {
+  background: #09457e;
+}
+
+body {
+  background: white;
+  width: 800px;
+  margin: auto;
+  padding: 20px 100px;
+}
+
+.tabs {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 1;
+  background: #eec;
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+.tab:hover {
+  cursor: pointer;
+  background: #09457e;
+  color: white;
+}
+
+#new-option,
+#delete-option {
+  display: none;
+}
